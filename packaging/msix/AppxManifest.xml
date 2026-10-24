@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  MSIX manifest template. build-msix.ps1 fills in the $(...) tokens.
+
+  For a Microsoft Store submission, IdentityName, Publisher and PublisherDisplayName must be
+  exactly the values shown in Partner Center (Product management > Product identity).
+  The Store re-signs the package, so it does not need to be signed for submission.
+-->
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap rescap">
+
+  <Identity
+    Name="$(IdentityName)"
+    Publisher="$(Publisher)"
+    Version="$(Version)"
+    ProcessorArchitecture="$(Architecture)" />
+
+  <Properties>
+    <DisplayName>uEncrypt</DisplayName>
+    <PublisherDisplayName>$(PublisherDisplayName)</PublisherDisplayName>
+    <Logo>Images\StoreLogo.png</Logo>
+    <Description>Encrypt, decrypt and sign files with post-quantum keys or a passphrase, using the open age format.</Description>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="en-us" />
+  </Resources>
+
+  <Applications>
+    <Application Id="uencrypt" Executable="uencrypt-gui.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements
+        DisplayName="uEncrypt"
+        Description="Encrypt, decrypt and sign files"
+        BackgroundColor="transparent"
+        Square150x150Logo="Images\Square150x150Logo.png"
+        Square44x44Logo="Images\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
+      </uap:VisualElements>
+      <Extensions>
+        <!-- Double-clicking a .age file opens it in uEncrypt (the path is passed as an argument). -->
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="age">
+            <uap:DisplayName>age encrypted file</uap:DisplayName>
+            <uap:Logo>Images\FileIcon.png</uap:Logo>
+            <uap:InfoTip>Encrypted with age (open with uEncrypt to decrypt)</uap:InfoTip>
+            <uap:SupportedFileTypes>
+              <uap:FileType>.age</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <!-- Desktop (full trust) app: required for a Win32 (Wails/WebView2) app in the Store. -->
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

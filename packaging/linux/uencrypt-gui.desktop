@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=uEncrypt
+GenericName=File Encryption
+Comment=Encrypt, decrypt and sign files with post-quantum keys
+Exec=uencrypt-gui %F
+Icon=uencrypt
+StartupWMClass=uencrypt-gui
+Terminal=false
+Categories=Utility;Security;
+MimeType=application/x-age-encrypted;
+Keywords=encrypt;decrypt;sign;age;post-quantum;

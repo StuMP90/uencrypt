@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Lets the desktop recognise age files and open them with uEncrypt. -->
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-age-encrypted">
+    <comment>age encrypted file</comment>
+    <generic-icon name="application-x-generic"/>
+    <glob pattern="*.age"/>
+    <magic priority="60">
+      <match type="string" offset="0" value="age-encryption.org/v1"/>
+      <match type="string" offset="0" value="-----BEGIN AGE ENCRYPTED FILE-----"/>
+    </magic>
+  </mime-type>
+</mime-info>

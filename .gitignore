@@ -1,0 +1,33 @@
+# Build output
+/uencrypt
+/uencrypt-gui
+/bin/
+/dist/
+/build/bin/
+/artifacts/
+gui/build/bin/
+*.exe
+*.deb
+*.msix
+*.msixupload
+*.appx
+packaging/msix/layout/
+
+# Frontend
+node_modules/
+gui/frontend/package.json.md5
+gui/frontend/dist/*
+!gui/frontend/dist/gitkeep
+
+# Never commit keys or decrypted test output
+*.pem
+!testdata/**/*.pem
+*.key
+*.dec.*
+
+# Editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.sw?

@@ -1,0 +1,3 @@
+This is a test file that will be encrypted using RSA2048 encryption.
+It contains some secret information that should be protected.
+The quick brown fox jumps over the lazy dog.
