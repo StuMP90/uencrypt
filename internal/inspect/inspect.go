@@ -11,6 +11,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/StuMP90/uencrypt/internal/content"
@@ -275,9 +276,14 @@ func recipients(stanzas []envelope.Stanza, opts Options) ([]Recipient, string) {
 	return out, access
 }
 
+// plural pluralises a description, putting the "s" before any trailing
+// detail in brackets: "post-quantum keys (ML-KEM-768 + X25519)".
 func plural(n int, s string) string {
 	if n == 1 {
 		return s
+	}
+	if i := strings.Index(s, " ("); i >= 0 {
+		return s[:i] + "s" + s[i:]
 	}
 	return s + "s"
 }

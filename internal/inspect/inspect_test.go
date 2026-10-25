@@ -183,3 +183,22 @@ func TestPlain(t *testing.T) {
 		t.Fatalf("%+v", rep)
 	}
 }
+
+func TestPlural(t *testing.T) {
+	cases := []struct {
+		n    int
+		in   string
+		want string
+	}{
+		{1, "post-quantum key (ML-KEM-768 + X25519)", "post-quantum key (ML-KEM-768 + X25519)"},
+		{2, "post-quantum key (ML-KEM-768 + X25519)", "post-quantum keys (ML-KEM-768 + X25519)"},
+		{2, "classic key (X25519)", "classic keys (X25519)"},
+		{3, "passphrase", "passphrases"},
+		{2, "SSH Ed25519 key", "SSH Ed25519 keys"},
+	}
+	for _, c := range cases {
+		if got := plural(c.n, c.in); got != c.want {
+			t.Errorf("plural(%d, %q) = %q, want %q", c.n, c.in, got, c.want)
+		}
+	}
+}
